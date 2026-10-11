@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10171c" />
+  <title>Konvoi — Studio Rekonstruksi</title>
+  <meta name="description" content="Jelajahi rekonstruksi tiga dimensi konvoi kendaraan berdasarkan video acuan, dengan pemutaran 8 detik dan kamera interaktif." />
+  <style>
+:root{color-scheme:dark;--background:#10171c;--surface:#172128;--surface-deep:#121b21;--border:#2b373f;--muted:#8b9ba6;--text:#ecf0f1;--accent:#b7e0ff;--blue:#6dbcf2}*{box-sizing:border-box}body{margin:0;background:var(--background);color:var(--text);font-family:'DM Sans',Arial,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}button,a,input{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}a{color:inherit;text-decoration:none}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:4px}button{transition:background .18s,color .18s,border-color .18s}button:disabled{opacity:.45;cursor:wait}[hidden]{display:none!important}.site-header{height:85px;padding:0 6.4%;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px}.brand-mark{display:grid;place-items:center;width:30px;height:32px;border-radius:5px;background:#284451;color:#9bd7ff}.brand-mark svg{width:22px;height:22px;stroke-width:2.1}.brand-name{font:750 25px 'Manrope',sans-serif;letter-spacing:-1px}.brand-dot{color:var(--blue)}.brand-divider{height:20px;width:1px;background:#39444b;margin:0 12px}.brand-tag{font-size:9px;letter-spacing:2px;color:#a3afb8;font-weight:600}.header-note{font-size:11px;color:#8b9ba6;letter-spacing:.2px;display:flex;align-items:center;gap:8px}.header-note>span{width:5px;height:5px;background:#99ac99;border-radius:50%}.workspace{max-width:1400px;margin:0 auto;padding:44px 6.4% 0}.intro{position:relative;margin-bottom:29px}.eyebrow{display:flex;align-items:center;gap:8px;color:#9fc3d9;font-size:9px;font-weight:600;letter-spacing:2.1px;margin-bottom:15px}.tiny-line{height:1px;width:21px;background:#94ccee}h1{font-family:'Manrope',sans-serif;font-size:clamp(32px,3.4vw,46px);letter-spacing:-1.6px;line-height:1.2;font-weight:650;margin:0}h1 span{color:#94a9b5}.intro>p{position:absolute;right:0;bottom:0;color:#a0afb9;margin:0;font-size:12px;line-height:1.8}.experience{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:29px;align-items:start}.viewer-shell{border:1px solid var(--border);border-radius:9px;overflow:hidden;background:#151f26}.viewer-topbar{height:48px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}.scene-title{font-size:11px;color:#bac8d0;display:flex;align-items:center;gap:8px}.scene-dot{width:5px;height:5px;border-radius:50%;background:#9dccb5}.scene-number{color:#758690;margin-left:6px;font-size:10px}.icon-button{border:0;background:transparent;color:#95a5af;width:30px;height:30px;display:grid;place-items:center;border-radius:5px}.icon-button:hover{background:#2a3842;color:#fff}.icon-button svg{width:16px;height:16px}.viewer-grid{position:relative;display:grid;grid-template-columns:1fr auto 1fr;background:#111a20;min-height:422px;overflow:hidden}.stage{position:relative;width:270px;height:480px;aspect-ratio:9/16;overflow:hidden;background:#7f9dac;touch-action:none}.stage>canvas{width:100%;height:100%;display:block;position:absolute;inset:0}.stage-label,.stage-meta,.stage-bottom{position:absolute;z-index:3;font-size:8px;letter-spacing:1.2px;pointer-events:none}.stage-label{left:13px;top:15px;padding:6px 7px;border:1px solid #ffffff38;background:#10202a5e;border-radius:3px;display:flex;gap:6px;align-items:center;backdrop-filter:blur(4px)}.status-dot{width:4px;height:4px;border-radius:50%;background:#d3edca}.stage-meta{top:51px;left:14px;display:flex;flex-direction:column;gap:6px;font-variant-numeric:tabular-nums;color:#e0edf3;text-shadow:0 1px 3px #000;letter-spacing:.5px}.stage-meta b{font-weight:500}.stage-bottom{bottom:12px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;text-shadow:0 1px 3px #000}.corner-mark{font-size:20px;font-weight:300}.reference-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;background:#121b21}.viewer-margin{position:relative;color:#556975;display:flex;justify-content:center;align-items:center}.viewer-margin>span{font-size:8px;letter-spacing:1.5px;white-space:nowrap;writing-mode:vertical-rl}.left-margin>span{transform:rotate(180deg)}.crosshair{position:absolute;color:#40515d;font-size:20px;font-weight:300}.left-margin .crosshair{top:20px;left:20px}.right-margin .crosshair{bottom:20px;right:20px}.loading{position:absolute;inset:0;background:#142029;z-index:4;display:flex;flex-direction:column;gap:17px;justify-content:center;align-items:center;font-size:11px;color:#abc0cd}.loader-orbit{height:28px;width:28px;border:1px solid #385365;border-top-color:#a6d5f3;border-radius:50%;animation:rotate 1s linear infinite}@keyframes rotate{to{transform:rotate(360deg)}}.error{position:absolute;inset:0;background:#19252e;z-index:5;display:grid;place-items:center;padding:24px;line-height:1.7;color:#d9b3a8;font-size:12px;text-align:center}.transport{background:#19232b;padding:15px 18px 13px;border-top:1px solid var(--border)}.playback-row{display:flex;align-items:center;gap:11px}.play-button{display:flex;align-items:center;justify-content:center;gap:6px;border:0;background:var(--accent);color:#142e40;border-radius:5px;height:33px;padding:0 13px;font-size:11px;font-weight:700;min-width:79px}.play-button:hover{background:#d0ecff}.play-button svg{width:14px;height:14px;fill:currentColor;stroke:none}.replay-button{width:27px;flex-shrink:0}.timeline-wrap{flex:1;display:flex;min-width:30px}#timeline{-webkit-appearance:none;appearance:none;cursor:pointer;width:100%;height:3px;background:linear-gradient(to right,#b7e0ff 0%,#b7e0ff var(--progress,0%),#3b4a55 var(--progress,0%),#3b4a55 100%);border-radius:3px;margin:0}#timeline::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;background:#d4eeff;border-radius:50%;border:0}#timeline::-moz-range-thumb{width:9px;height:9px;background:#d4eeff;border-radius:50%;border:0}.time-label{color:#9daeb9;font-size:9px;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:.2px;min-width:76px;text-align:right}.tools-row{margin-top:15px;display:flex;justify-content:space-between;gap:10px;align-items:center}.camera-switch{display:flex;padding:3px;border:1px solid #33414c;border-radius:6px;gap:2px}.camera-button{display:flex;align-items:center;gap:6px;padding:7px 9px;font-size:9px;color:#91a3af;border:0;background:transparent;border-radius:3px;white-space:nowrap}.camera-button.active{color:#dae9f2;background:#33434f}.camera-button:hover{color:#edf4fa}.camera-button svg{width:13px;height:13px}.secondary-tools{display:flex;align-items:center;gap:13px}.text-button{background:transparent;border:0;display:flex;align-items:center;gap:5px;color:#9aabb7;font-size:9px;padding:5px 0}.text-button:hover,.text-button.active{color:#dceefd}.text-button svg{width:13px;height:13px}.record-dot{height:6px;width:6px;border:1px solid #b1bbc2;border-radius:50%}.text-button.recording{color:#ff9a88}.recording .record-dot{background:#ff9a88;border-color:#ff9a88;animation:pulse 1s infinite}@keyframes pulse{50%{opacity:.35}}.scene-panel{padding:17px 0 0}.panel-kicker{color:#94a7b4;font-size:8px;letter-spacing:1.8px;font-weight:600;display:flex;align-items:center;justify-content:space-between}.panel-kicker>span{font-size:10px;letter-spacing:0;color:#647984}.scene-panel h2{font-family:'Manrope',sans-serif;font-size:25px;line-height:1.4;letter-spacing:-.6px;font-weight:600;margin:18px 0 12px}.panel-description{color:#95a7b2;font-size:11px;line-height:1.85;margin:0}.scene-stats{display:flex;justify-content:space-between;margin-top:22px;gap:10px}.scene-stats>div{display:flex;flex-direction:column;gap:7px}.scene-stats strong{font-family:'Manrope',sans-serif;font-size:21px;font-weight:550;letter-spacing:-.5px}.scene-stats strong span{font-size:12px;color:#9daeba;margin-left:3px}.scene-stats>div>span{font-size:8px;color:#8fa3b0}.panel-separator{height:1px;background:var(--border);margin:24px 0 19px}.scene-panel h3{font-size:10px;letter-spacing:.2px;font-weight:600;margin:0 0 17px;color:#cbd7de}.scene-legend{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:17px}.scene-legend li{display:flex;align-items:center;gap:10px}.legend-color{width:8px;height:8px;border-radius:2px;flex-shrink:0}.police-color{background:#a8d1eb}.bus-color{background:#e27476}.traffic-color{background:#b9bbb0}.scene-legend li>div{display:flex;flex-direction:column;gap:4px}.scene-legend strong{font-size:10px;font-weight:500}.scene-legend li>div>span{color:#8398a6;font-size:9px}.legend-number{margin-left:auto;color:#607683;font-size:9px}.usage-tip{display:flex;gap:11px;margin-bottom:13px}.usage-tip>span{color:#6f8b9a;font-size:9px;padding-top:2px}.usage-tip p{font-size:10px;color:#8fa3b0;line-height:1.7;margin:0}.usage-tip strong{font-weight:500;color:#c6d6e0}.calibration-note{margin-top:20px;display:flex;gap:8px;background:#1b262e;border:1px solid #2b3a44;padding:12px 11px;border-radius:5px;align-items:flex-start}.calibration-note svg{width:13px;height:13px;flex-shrink:0;color:#8aabbe;margin-top:1px}.calibration-note p{font-size:9px;line-height:1.7;color:#8ea6b5;margin:0}.site-footer{display:flex;align-items:center;justify-content:space-between;padding:24px 0 25px}.site-footer>span{font-size:8px;letter-spacing:1.8px;color:#617784}.site-footer a{font-size:10px;color:#a9bbc7;display:flex;gap:7px;align-items:center}.site-footer a:hover{color:#e2f2fc}.site-footer svg{width:12px;height:12px}.site-footer a>span{font-size:14px;margin-left:4px}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.viewer-shell:fullscreen{width:100vw;height:100dvh;border:0;border-radius:0;display:flex;flex-direction:column}.viewer-shell:fullscreen .viewer-grid{flex:1;min-height:0}.viewer-shell:fullscreen .stage{height:100%;width:auto;max-width:100vw}.viewer-shell:fullscreen .transport{flex-shrink:0}.viewer-shell:fullscreen .viewer-topbar{flex-shrink:0}@media(min-width:1450px){.workspace{padding-top:50px}.stage{width:310px;height:551px}.scene-panel{padding-top:22px}.scene-panel h2{font-size:29px}.panel-description{font-size:12px}.panel-separator{margin:28px 0 23px}.usage-tip p{font-size:11px}}@media(max-width:1050px){.site-header{padding:0 5%}.workspace{padding-left:5%;padding-right:5%}.experience{grid-template-columns:minmax(0,1fr) 230px;gap:23px}.stage{width:252px;height:448px}.intro>p{font-size:11px}.camera-button{padding:7px 7px;font-size:8px}.secondary-tools{gap:9px}.text-button{font-size:8px}.scene-panel h2{font-size:23px}.transport{padding:14px}.tools-row{gap:7px}}@media(max-width:800px){.site-header{height:70px}.header-note{font-size:9px}.brand-name{font-size:23px}.brand-tag{font-size:8px;letter-spacing:1.2px}.brand-divider{margin:0 6px}.workspace{padding-top:30px}.intro>p{position:static;font-size:12px;line-height:1.7;margin-top:16px}.intro{margin-bottom:24px}.desktop-break{display:none}.experience{grid-template-columns:1fr;gap:25px}.stage{width:270px;height:480px}.scene-panel{padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:25px}.panel-kicker,.scene-panel h2,.panel-description,.scene-stats{grid-column:1}.panel-kicker{align-self:start}.scene-panel h2{margin-top:14px}.scene-panel .panel-separator{display:none}.scene-panel>h3,.scene-legend,.usage-tip,.calibration-note{grid-column:2}.scene-panel>h3:first-of-type{grid-row:1;align-self:start;margin:0}.scene-legend{grid-row:2 / span 2;align-self:start;margin-top:5px}.scene-panel>h3:last-of-type{grid-row:4;align-self:end;margin-bottom:11px}.usage-tip:first-of-type{grid-row:5}.usage-tip:last-of-type{grid-row:6}.calibration-note{grid-column:1/-1;margin-top:15px}.scene-stats{margin-top:15px;align-self:start}.site-footer{padding-top:25px}}@media(max-width:530px){.site-header{padding:0 20px;height:65px}.brand{gap:8px}.brand-tag{display:none}.brand-divider{display:none}.header-note{font-size:8px}.workspace{padding:27px 16px 0}.intro{padding:0 4px}.eyebrow{font-size:8px;margin-bottom:13px}.intro h1{font-size:33px;letter-spacing:-1.2px}.intro>p{font-size:11px;margin-top:13px}.viewer-topbar{height:43px;padding:0 13px}.scene-title{font-size:10px}.stage{width:min(74vw,288px);height:auto;min-height:0;aspect-ratio:9/16}.viewer-grid{min-height:0}.viewer-margin>span{font-size:6px;letter-spacing:1.2px}.left-margin .crosshair{top:13px;left:8px}.right-margin .crosshair{bottom:13px;right:8px}.transport{padding:13px 11px}.playback-row{gap:8px}.play-button{min-width:68px;padding:0 9px;height:32px;font-size:10px}.replay-button{width:22px}.time-label{font-size:8px;min-width:65px}.tools-row{flex-wrap:wrap;margin-top:13px;row-gap:12px}.camera-switch{padding:2px}.camera-button{padding:7px 6px;font-size:8px;gap:4px}.camera-button svg{width:12px;height:12px}.secondary-tools{gap:10px}.text-button{font-size:8px;gap:4px}.scene-panel{display:block;padding:0 5px}.panel-kicker{margin-top:2px}.scene-panel h2{font-size:25px;margin:16px 0 10px}.panel-description{font-size:11px;max-width:340px}.scene-stats{margin:22px 0 0;justify-content:flex-start;gap:45px}.scene-stats strong{font-size:23px}.scene-stats>div>span{font-size:9px}.scene-panel .panel-separator{display:block;margin:24px 0 20px}.scene-panel>h3:first-of-type,.scene-panel>h3:last-of-type{margin:0 0 16px}.scene-legend{gap:18px;margin:0}.scene-legend strong{font-size:11px}.scene-legend li>div>span{font-size:10px}.usage-tip p{font-size:11px}.calibration-note{margin-top:21px;padding:13px}.calibration-note p{font-size:10px}.site-footer{padding:22px 4px 25px;gap:10px}.site-footer>span{font-size:6px;letter-spacing:1.2px}.site-footer a{font-size:9px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto;transition:none!important}.loader-orbit,.recording .record-dot{animation:none}}
+.comparison{position:relative;width:270px;aspect-ratio:9/16;background:#10191f;overflow:hidden}.comparison-label{position:absolute;left:12px;top:15px;z-index:3;padding:6px 7px;border:1px solid #ffffff38;border-radius:3px;background:#10202a5e;font-size:8px;letter-spacing:1.2px;pointer-events:none}.viewer-layout.comparing{grid-template-columns:1fr minmax(0,270px) minmax(0,270px) 1fr;gap:8px}.viewer-layout.comparing .stage,.viewer-layout.comparing .comparison{width:100%;height:auto;aspect-ratio:9/16}.viewer-layout.comparing .viewer-margin{min-width:10px}.viewer-layout.comparing .viewer-margin>span,.viewer-layout.comparing .crosshair{display:none}@media(min-width:1450px){.viewer-layout.comparing{grid-template-columns:1fr minmax(0,310px) minmax(0,310px) 1fr}.comparison{width:310px}}@media(max-width:530px){.viewer-layout.comparing{grid-template-columns:4px minmax(0,1fr) minmax(0,1fr) 4px;gap:4px}.viewer-layout.comparing .stage-label,.viewer-layout.comparing .comparison-label{font-size:6px;letter-spacing:.4px;left:7px;top:10px;padding:5px}.viewer-layout.comparing .stage-meta{left:8px;top:41px;font-size:7px}.viewer-layout.comparing .stage-bottom{left:8px;right:8px;font-size:6px}}
+
+#notice{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:14px 20px;max-width:90vw;border:1px solid #3c5667;border-radius:8px;background:#233641;color:#eff9ff;z-index:20;font-size:13px;line-height:1.5;box-shadow:0 6px 30px #0005}
+
+</style>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Konvoi, beranda">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 28 28"><path d="M7 4v20M14 4v7m0 6v7M21 4v20"/></svg></span>
+      <span class="brand-name">konvoi<span class="brand-dot">.</span></span>
+      <span class="brand-divider"></span><span class="brand-tag">STUDIO REKONSTRUKSI</span>
+    </a>
+    <div class="header-note"><span></span> Eksperimen visual / 001</div>
+  </header>
+
+  <main class="workspace">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="eyebrow"><span class="tiny-line"></span> VIDEO MENJADI RUANG</div>
+      <h1 id="page-title">Satu perjalanan.<br /><span>Sudut pandang baru.</span></h1>
+      <p>Sebuah konvoi, direkonstruksi dalam tiga dimensi.<br class="desktop-break" /> Putar adegannya. Temukan perspektif Anda.</p>
+    </section>
+
+    <section class="experience" aria-label="Pemutar rekonstruksi konvoi">
+      <div id="viewer" class="viewer-shell">
+        <div class="viewer-topbar">
+          <div class="scene-title"><span class="scene-dot"></span> Konvoi di jalan raya <span class="scene-number">/ 01</span></div>
+          <button id="fullscreenBtn" class="icon-button" aria-label="Buka layar penuh" title="Layar penuh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+        </div>
+        <div class="viewer-grid viewer-layout">
+          <div class="viewer-margin left-margin" aria-hidden="true"><span>VIDEO ACUAN / 50 FPS</span><div class="crosshair">+</div></div>
+          <div id="stage" class="stage">
+            <div class="stage-label"><span class="status-dot"></span> REKONSTRUKSI 3D</div>
+            <div class="stage-meta"><span id="sceneTime">00:00.00</span><span><b id="fps">—</b> FPS</span></div>
+            <div id="loading" class="loading"><div class="loader-orbit"></div><span id="loadingText">Menyiapkan adegan 3D…</span></div>
+            <div id="error" class="error" hidden role="alert"></div>
+            <div class="stage-bottom"><span id="viewLabel">KAMERA ACUAN</span><span class="corner-mark">+</span></div>
+          </div>
+          <div id="comparison" class="comparison" hidden><video id="referenceVideo" class="reference-video" src="assets/referensi.mp4" poster="assets/poster.jpg" muted playsinline preload="metadata" aria-label="Video acuan konvoi"></video><div class="comparison-label">VIDEO ACUAN</div></div>
+          <div class="viewer-margin right-margin" aria-hidden="true"><div class="crosshair">+</div><span>8 DETIK · 3 DIMENSI</span></div>
+        </div>
+        <div class="transport">
+          <div class="playback-row">
+            <button id="playBtn" class="play-button" aria-label="Putar atau jeda animasi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7z"/></svg><span>Putar</span></button>
+            <button id="replayBtn" class="icon-button replay-button" aria-label="Ulangi animasi" title="Ulang"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 0 5M4 4v6h6"/></svg><span class="visually-hidden">Ulang</span></button>
+            <div class="timeline-wrap"><input id="timeline" type="range" min="0" max="8" step="0.01" value="0" aria-label="Waktu animasi dalam detik" /></div>
+            <span id="timeLabel" class="time-label">00:00 / 00:08</span>
+          </div>
+          <div class="tools-row">
+            <div class="camera-switch" role="group" aria-label="Mode kamera">
+              <button id="referenceBtn" class="camera-button active" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h5l2-3h4l2 3h5v13H3z"/><circle cx="12" cy="13" r="4"/></svg>Kamera acuan</button>
+              <button id="orbitBtn" class="camera-button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5m-9 5v8"/></svg>Jelajah 3D</button>
+            </div>
+            <div class="secondary-tools">
+              <button id="compareBtn" class="text-button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM12 5v14"/></svg><span>Bandingkan</span></button>
+              <button id="recordBtn" class="text-button"><span class="record-dot"></span><span>Rekam</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="scene-panel" aria-labelledby="scene-info-title">
+        <div class="panel-kicker">CATATAN ADEGAN <span>01</span></div>
+        <h2 id="scene-info-title">Delapan detik.<br />Banyak cerita.</h2>
+        <p class="panel-description">Mobil patroli memimpin bus magenta mendekati kamera, di antara bus, truk, dan sepeda motor.</p>
+        <div class="scene-stats"><div><strong>08<span>s</span></strong><span>Durasi adegan</span></div><div><strong>50</strong><span>FPS video acuan</span></div><div><strong>.GLB</strong><span>Format model</span></div></div>
+        <div class="panel-separator"></div>
+        <h3>Dalam adegan</h3>
+        <ul class="scene-legend"><li><span class="legend-color police-color"></span><div><strong>Mobil patroli</strong><span>Memimpin konvoi</span></div><span class="legend-number">01</span></li><li><span class="legend-color bus-color"></span><div><strong>Bus magenta</strong><span>Kendaraan utama</span></div><span class="legend-number">02</span></li><li><span class="legend-color traffic-color"></span><div><strong>Lalu lintas sekitar</strong><span>Bus, truk & sepeda motor</span></div><span class="legend-number">03</span></li></ul>
+        <div class="panel-separator"></div>
+        <h3>Coba perspektif lain</h3>
+        <div class="usage-tip"><span>01</span><p>Pilih <strong>Jelajah 3D</strong> untuk memutar kamera dengan sentuhan atau mouse.</p></div>
+        <div class="usage-tip"><span>02</span><p>Geser linimasa untuk melihat setiap momen perjalanan.</p></div>
+        <div class="calibration-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></svg><p>Rekonstruksi berdasarkan video acuan. Posisi dan kamera diperkirakan; kemiripan 1:1 belum terkalibrasi.</p></div>
+      </aside>
+    </section>
+    <footer class="site-footer"><span>DARI REKAMAN, KE RUANG.</span><a href="assets/rekonstruksi_konvoi.glb" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg>Unduh model 3D <span>↗</span></a></footer>
+  </main>
+  <script type="module">
+Promise.all([import('three'),import('three/addons/loaders/GLTFLoader.js'),import('three/addons/controls/OrbitControls.js')]).then(([THREE,{GLTFLoader},{OrbitControls}]) => {
+
+const $ = id => document.getElementById(id);
+const DURATION = 8;
+const stage = $('stage');
+const video = $('referenceVideo');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#b5d3e2');
+scene.fog = new THREE.Fog('#b5d3e2', 145, 300);
+let renderer, mixer, animationAction, sourceCamera, model, time = 0, playing = false, ready = false;
+let mode = 'reference', comparing = false, recording = false, recorder, recordParts = [];
+const orbitCamera = new THREE.PerspectiveCamera(47, 9 / 16, 0.1, 550);
+let controls;
+let beacon;
+let previous = performance.now(), fpsTime = previous, frames = 0;
+
+function fail(message) {
+  $('loading').hidden = true;
+  $('error').hidden = false;
+  $('error').textContent = message;
+}
+
+function format(t) { return `00:${t.toFixed(2).padStart(5, '0')}`; }
+function updateUI() {
+  $('timeLabel').textContent = `${format(time)} / 00:08.00`;
+  $('sceneTime').textContent = `${time.toFixed(2)} s`;
+  $('timeline').value = time;
+  $('timeline').style.setProperty('--progress', `${time / DURATION * 100}%`);
+  $('playBtn').innerHTML = playing ? '<span aria-hidden="true">Ⅱ</span> Jeda' : '<span aria-hidden="true">▶</span> Putar';
+  $('playBtn').setAttribute('aria-label', playing ? 'Jeda animasi' : 'Putar animasi');
+}
+
+function syncVideo(force = false) {
+  if (!comparing || !Number.isFinite(video.duration)) return;
+  if (force || Math.abs(video.currentTime - time) > 0.16) video.currentTime = Math.min(time, video.duration);
+  if (playing && video.paused) video.play().catch(() => {});
+  if (!playing && !video.paused) video.pause();
+}
+
+function seek(t) {
+  time = THREE.MathUtils.clamp(Number(t), 0, DURATION);
+  if (mixer) { animationAction.paused = false; animationAction.enabled = true; mixer.setTime(time); }
+  if (beacon) {
+    const flash = Math.sin(time * 34) > 0 ? 2.8 : 0.25;
+    beacon.emissiveIntensity = flash;
+  }
+  syncVideo(true);
+  updateUI();
+}
+
+function setPlaying(value) {
+  if (!ready) return;
+  if (value && time >= DURATION) seek(0);
+  playing = value;
+  syncVideo(true);
+  updateUI();
+}
+
+function resize() {
+  if (!renderer) return;
+  const width = stage.clientWidth, height = stage.clientHeight;
+  renderer.setSize(width, height, false);
+  orbitCamera.aspect = width / height;
+  orbitCamera.updateProjectionMatrix();
+  if (sourceCamera) {
+    sourceCamera.aspect = width / height;
+    sourceCamera.updateProjectionMatrix();
+  }
+}
+
+function switchView(next) {
+  if (!ready) return;
+  mode = next;
+  controls.enabled = next === 'orbit';
+  if (next === 'orbit') {
+    const lead = model.getObjectByName('MagentaLeadCoach');
+    const target = lead ? lead.getWorldPosition(new THREE.Vector3()) : new THREE.Vector3(0, 2, -30);
+    target.y = 2;
+    controls.target.copy(target);
+    orbitCamera.position.copy(target).add(new THREE.Vector3(22, 18, 28));
+    controls.update();
+  }
+  $('referenceBtn').classList.toggle('active', next === 'reference');
+  $('orbitBtn').classList.toggle('active', next === 'orbit');
+  $('referenceBtn').setAttribute('aria-pressed', String(next === 'reference'));
+  $('orbitBtn').setAttribute('aria-pressed', String(next === 'orbit'));
+  stage.classList.toggle('orbit-mode', next === 'orbit');
+  if ($('viewLabel')) $('viewLabel').textContent = next === 'orbit' ? 'JELAJAH 3D' : 'KAMERA ACUAN';
+}
+
+async function toggleRecord() {
+  if (recording) { recorder.stop(); return; }
+  if (!ready) return;
+  if (!window.MediaRecorder || !renderer.domElement.captureStream) {
+    showNotice('Perekaman belum didukung browser ini. Gunakan fitur rekam layar perangkat.');
+    return;
+  }
+  const mime = ['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm','video/mp4'].find(type => MediaRecorder.isTypeSupported(type));
+  if (!mime) { showNotice('Format perekaman belum didukung browser ini.'); return; }
+  try {
+    const stream = renderer.domElement.captureStream(30);
+    recorder = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 5500000 });
+    recordParts = [];
+    recorder.ondataavailable = e => { if (e.data.size) recordParts.push(e.data); };
+    recorder.onstop = () => {
+      recording = false;
+      $('recordBtn').textContent = 'Rekam';
+      $('recordBtn').classList.remove('recording');
+      stream.getTracks().forEach(track => track.stop());
+      const blob = new Blob(recordParts, { type: mime });
+      const url = URL.createObjectURL(blob), a = document.createElement('a');
+      a.href = url; a.download = `konvoi-3d.${mime.includes('mp4') ? 'mp4' : 'webm'}`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
+      showNotice('Rekaman siap diunduh.');
+    };
+    recorder.onerror = () => { recording = false; showNotice('Perekaman gagal. Silakan coba kembali.'); };
+    recording = true;
+    $('recordBtn').textContent = 'Hentikan rekam';
+    $('recordBtn').classList.add('recording');
+    seek(0); setPlaying(true); recorder.start();
+  } catch (error) { showNotice('Perekaman tidak dapat dimulai pada browser ini.'); }
+}
+
+let noticeTimer;
+function showNotice(message) {
+  let notice = $('notice');
+  if (!notice) { notice = document.createElement('div'); notice.id = 'notice'; notice.setAttribute('role','status'); document.body.appendChild(notice); }
+  notice.textContent = message;
+  notice.hidden = false;
+  clearTimeout(noticeTimer);
+  noticeTimer = setTimeout(() => { notice.hidden = true; }, 5000);
+}
+
+function animate(now) {
+  requestAnimationFrame(animate);
+  const delta = Math.min((now - previous) / 1000, 0.1);
+  previous = now;
+  if (ready && playing && !document.hidden) {
+    time = Math.min(DURATION, time + delta);
+    animationAction.paused = false; animationAction.enabled = true; mixer.setTime(time);
+    if (beacon) beacon.emissiveIntensity = Math.sin(time * 34) > 0 ? 2.8 : 0.25;
+    updateUI(); syncVideo();
+    if (time >= DURATION) {
+      setPlaying(false);
+      if (recording && recorder.state !== 'inactive') recorder.stop();
+    }
+  }
+  if (controls?.enabled) controls.update();
+  if (sourceCamera) renderer.render(scene, mode === 'orbit' ? orbitCamera : sourceCamera);
+  frames++;
+  if (now - fpsTime > 1000) {
+    $('fps').textContent = `${Math.round(frames * 1000 / (now - fpsTime))}`;
+    fpsTime = now; frames = 0;
+  }
+}
+
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: false, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.25;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.domElement.setAttribute('aria-label', 'Animasi 3D konvoi kendaraan');
+  stage.prepend(renderer.domElement);
+  controls = new OrbitControls(orbitCamera, renderer.domElement);
+  controls.enabled = false;
+  controls.enableDamping = true;
+  controls.maxPolarAngle = Math.PI * 0.49;
+  controls.minDistance = 4;
+  controls.maxDistance = 180;
+  scene.add(new THREE.HemisphereLight(0xe5f4ff, 0x637653, 2));
+  const sun = new THREE.DirectionalLight(0xfff3d5, 3.2);
+  sun.position.set(35, 58, 15);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(1024,1024);
+  sun.shadow.camera.left = -40; sun.shadow.camera.right = 40;
+  sun.shadow.camera.top = 55; sun.shadow.camera.bottom = -60;
+  sun.shadow.camera.far = 170;
+  sun.shadow.normalBias = 0.025;
+  sun.target.position.set(0, 0, -22);
+  scene.add(sun, sun.target);
+  new ResizeObserver(resize).observe(stage);
+  resize();
+  new GLTFLoader().load('./assets/rekonstruksi_konvoi.glb', gltf => {
+    model = gltf.scene;
+    scene.add(model);
+    sourceCamera = gltf.cameras.find(camera => camera.name === 'ReferenceCamera') || gltf.cameras[0];
+    if (!sourceCamera) { fail('Kamera acuan tidak ditemukan pada model.'); return; }
+    model.traverse(node => {
+      if (!node.isMesh) return;
+      node.castShadow = true; node.receiveShadow = true;
+      const materials = Array.isArray(node.material) ? node.material : [node.material];
+      materials.forEach(material => { if (material.name === 'beacon_blue') beacon = material; });
+    });
+    if (!gltf.animations.length) { fail('Animasi tidak ditemukan pada model.'); return; }
+    mixer = new THREE.AnimationMixer(model);
+    const action = mixer.clipAction(gltf.animations[0]); animationAction = action;
+    action.setLoop(THREE.LoopOnce, 1); action.clampWhenFinished = true; action.play();
+    ready = true;
+    $('loading').hidden = true;
+    document.querySelectorAll('[data-needs-scene]').forEach(button => { button.disabled = false; });
+    seek(0); resize();
+    window.__konvoi = { scene, model, mixer, sourceCamera, renderer, seek, get time() { return time; }, get playing() { return playing; }, get mode() { return mode; } };
+  }, progress => {
+    $('loadingText').textContent = progress.total ? `Memuat adegan · ${Math.round(progress.loaded / progress.total * 100)}%` : 'Memuat adegan 3D…';
+  }, () => fail('Model gagal dimuat. Buka melalui server lokal atau hosting, lalu coba kembali.'));
+  requestAnimationFrame(animate);
+} catch (error) {
+  fail('WebGL tidak tersedia. Aktifkan akselerasi grafis atau gunakan browser lain.');
+}
+
+$('playBtn').addEventListener('click', () => setPlaying(!playing));
+$('replayBtn').addEventListener('click', () => { if (!ready) return; seek(0); setPlaying(true); });
+$('timeline').addEventListener('input', e => { if (!ready) return; setPlaying(false); seek(e.target.value); });
+$('referenceBtn').addEventListener('click', () => switchView('reference'));
+$('orbitBtn').addEventListener('click', () => switchView('orbit'));
+$('compareBtn').addEventListener('click', () => {
+  comparing = !comparing;
+  $('compareBtn').classList.toggle('active', comparing);
+  $('compareBtn').setAttribute('aria-pressed', String(comparing));
+  const comparison = $('comparison');
+  if (comparison) comparison.hidden = !comparing;
+  else video.hidden = !comparing;
+  document.querySelector('.viewer-layout')?.classList.toggle('comparing', comparing);
+  document.querySelector('.viewer-grid')?.classList.toggle('comparing', comparing);
+  if (comparing) syncVideo(true); else video.pause();
+});
+$('recordBtn').addEventListener('click', toggleRecord);
+$('fullscreenBtn').addEventListener('click', async () => {
+  const panel = $('viewer') || stage;
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else if (panel.requestFullscreen) await panel.requestFullscreen();
+    else showNotice('Putar perangkat ke posisi lanskap untuk tampilan lebih luas.');
+  } catch (error) { showNotice('Layar penuh tidak tersedia pada browser ini.'); }
+});
+document.addEventListener('visibilitychange', () => { previous = performance.now(); if (document.hidden) setPlaying(false); });
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space' && !['INPUT','BUTTON'].includes(document.activeElement.tagName)) { e.preventDefault(); setPlaying(!playing); }
+});
+video.addEventListener('loadedmetadata', () => syncVideo(true));
+updateUI();
+}).catch(error=>{console.error(error);document.getElementById('loading').hidden=true;const message=document.getElementById('error');message.textContent='Adegan 3D belum dapat dimuat. Buka melalui server lokal lalu muat ulang halaman.';message.hidden=false;});
+</script>
+</body>
+</html>
